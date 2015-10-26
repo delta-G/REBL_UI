@@ -6,9 +6,9 @@
 #include "Defines.h"
 
 
-void initInterface();
+void initInterface(uint8_t, uint8_t, uint8_t);
 
-void initButton();
+void initButton(uint8_t);
 void pollButton();
 void clearButton();
 boolean checkButton();
@@ -18,7 +18,7 @@ void buttonOff();
 boolean isButtonOn();
 
 
-void initEncoder();
+void initEncoder(uint8_t, uint8_t);
 void ISR_encoder_handler();
 void encoderOn();
 void encoderOff();

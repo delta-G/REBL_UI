@@ -1,4 +1,8 @@
 #include "REBLInterface.h"
+#define NOT_AN_INTERRUPT 50
+
+uint8_t buttonPin;
+uint8_t encoderInterrupt;
 
 byte bMask;
 
@@ -12,16 +16,17 @@ boolean buttonLongPressed = false;
 boolean killPress = false;
 boolean buttonIsOn = false;
 
-void initInterface() {
-	initEncoder();
-	initButton();
+void initInterface(uint8_t aButPin, uint8_t aIntPin, uint8_t aBPin) {
+	initEncoder(aIntPin, aBPin);
+	initButton(aButPin);
 }
 
-void initEncoder() {
-	pinMode(ENCODER_INTERRUPT_PIN, INPUT_PULLUP);
-	pinMode(ENCODER_B_PIN, INPUT_PULLUP);
-	bMask = digitalPinToBitMask(ENCODER_B_PIN);
-	bReg = portInputRegister(digitalPinToPort(ENCODER_B_PIN));
+void initEncoder(uint8_t aIntPin, uint8_t aBPin) {
+	pinMode(aIntPin, INPUT_PULLUP);
+	pinMode(aBPin, INPUT_PULLUP);
+	bMask = digitalPinToBitMask(aBPin);
+	bReg = portInputRegister(digitalPinToPort(aBPin));
+	encoderInterrupt = digitalPinToInterrupt(aIntPin);
 }
 
 void ISR_encoder_handler() {
@@ -40,13 +45,13 @@ void ISR_encoder_handler() {
 }
 
 void encoderOn() {
-	attachInterrupt(0, ISR_encoder_handler, FALLING);
+	attachInterrupt(encoderInterrupt, ISR_encoder_handler, FALLING);
 	encoderCounter = 0;
 	encoderIsOn = true;
 }
 
 void encoderOff() {
-	detachInterrupt(0);
+	detachInterrupt(encoderInterrupt);
 	encoderCounter = 0;
 	encoderIsOn = false;
 }
@@ -142,8 +147,9 @@ boolean isEncoderOn() {
 	return encoderIsOn;
 }
 
-void initButton() {
-	pinMode(BUTTON_PIN, INPUT_PULLUP);
+void initButton(uint8_t aButPin) {
+	buttonPin = aButPin;
+	pinMode(buttonPin, INPUT_PULLUP);
 }
 
 void pollButton() {
@@ -151,7 +157,7 @@ void pollButton() {
 	static boolean lastState = HIGH;
 	static unsigned long pressTime = 0;
 	if (buttonIsOn) {
-		boolean curState = digitalRead(BUTTON_PIN);
+		boolean curState = digitalRead(buttonPin);
 		if (curState != lastState) {
 			pressTime = millis();
 		}

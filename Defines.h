@@ -16,21 +16,8 @@
 
 #define DISPLAY_DELAY 500
 
-#define COMMON_CATHODE_RGB_LCD  // Comment line if backlight LEDs are active HIGH.
+#define BACKLIGHT_ACTIVE_LOW  // Comment line if backlight LEDs are active HIGH.
 
-// If you change this you have to change the interrupt used in REBLInterface for the encoder
-#define ENCODER_INTERRUPT_PIN 2
-
-// Assign pins as needed.
-#define ENCODER_B_PIN 4
-#define BUTTON_PIN 8
-#define LCD_ENABLE_PIN A1
-#define LCD_RS_PIN A3
-
-#define HEART_BEAT_PIN A5
-#define LCD_BLUE A0
-#define LCD_GREEN A2
-#define LCD_RED A4
-
+#define BACKLIGHT_RGB
 
 #endif /* DEFINES_H_ */

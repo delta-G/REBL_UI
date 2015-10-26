@@ -10,7 +10,7 @@ enum color_vars {BLACK, RED , GREEN , YELLOW , BLUE , PURPLE , CYAN , WHITE};
 
 
 
-void initLCD();
+void initLCD(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
 void doBacklightColor();
 void setColor(color_vars);
 void doDisplay();
