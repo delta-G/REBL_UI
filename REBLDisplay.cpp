@@ -5,9 +5,11 @@ extern HardwareSerial Serial;
 #endif
 
 LiquidCrystal_SPI_8Bit *LCD;
+
 uint8_t redPin;
 uint8_t greenPin;
 uint8_t bluePin;
+
 
 char lineBuffer[NUM_LCD_ROWS][NUM_LCD_COLS + 1]; // Leave an extra space for terminating null
 
@@ -25,6 +27,7 @@ void initLCD(uint8_t aRsPin, uint8_t aEnablePin, uint8_t aRed, uint8_t aGreen, u
 	pinMode(greenPin, OUTPUT);
 	pinMode(bluePin, OUTPUT);
 
+
 #ifdef USING_SERIAL
 	Serial.begin(19200);
 #else
@@ -33,8 +36,11 @@ void initLCD(uint8_t aRsPin, uint8_t aEnablePin, uint8_t aRed, uint8_t aGreen, u
 	LCD->noCursor();
 	LCD->clear();
 	setColor(BLUE);
+
 #endif
 }
+
+
 
 void setColor(color_vars color) {
 	current_color = color;
@@ -42,7 +48,8 @@ void setColor(color_vars color) {
 
 
 
-void doBacklightColor() {
+
+void doBacklight() {
 #ifdef BACKLIGHT_ACTIVE_LOW  // Uses LOW to turn on an LED
 	digitalWrite(redPin, !(current_color & 1));
 	digitalWrite(greenPin, !(current_color & 2));
@@ -76,7 +83,7 @@ void doDisplay() {
 		delay(100);
 #else
 		LCD->clear();
-		doBacklightColor();
+		doBacklight();
 		for (int i = 0; i < NUM_LCD_ROWS; i++) {
 			lineBuffer[i][NUM_LCD_COLS] = 0;   // Make sure the null is there.
 			LCD->setCursor(0, i);

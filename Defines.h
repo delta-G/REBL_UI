@@ -18,6 +18,4 @@
 
 #define BACKLIGHT_ACTIVE_LOW  // Comment line if backlight LEDs are active HIGH.
 
-#define BACKLIGHT_RGB
-
 #endif /* DEFINES_H_ */
