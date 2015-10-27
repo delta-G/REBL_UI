@@ -58,8 +58,10 @@ void encoderOff() {
 
 char checkRotaryEncoder() {
 	if (encoderIsOn) {
+		cli();
 		char retval = encoderCounter;
 		encoderCounter = 0;
+		sei();
 		return retval;
 	} else {
 		return 0;
