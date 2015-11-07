@@ -37,7 +37,7 @@ boolean enterNumber(int& aVal, const __FlashStringHelper* aText, int aMin, int a
 
 	} // end switch(state)
 
-	if (reblMenu.cancelFlag) {
+	if (reblMenu.isCancelled()) {
 		state = 0;
 		encoderOff();
 		buttonOff();
@@ -66,7 +66,7 @@ boolean enterString(char* aBuffer, uint8_t aLength) {
 		useRotaryEncoderASCII(aBuffer[charsEntered]);
 	}
 
-	if (reblMenu.cancelFlag) {
+	if (reblMenu.isCancelled()) {
 		encoderOff();
 		buttonOff();
 		return true;
@@ -158,7 +158,7 @@ boolean inputTime(time_t& var) {
 
 	displayTime(var);
 
-	if (reblMenu.cancelFlag) {
+	if (reblMenu.isCancelled()) {
 		state = 0;
 		encoderOff();
 		buttonOff();

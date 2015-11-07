@@ -35,12 +35,12 @@ public:
 };
 
 class MenuClass {
-private:
+protected:
 	boolean runningFunction;
-public:
-	MenuList *currentMenu;
 	int currentItemIndex;
 	boolean cancelFlag;
+	MenuList *currentMenu;
+public:
 
 	MenuClass();
 	MenuClass(MenuList* aList);
@@ -49,6 +49,7 @@ public:
 	void setCurrentMenu(MenuList*);
 	boolean runFunction();
 	void getText(char*, int);
+	boolean isCancelled();
 	virtual void displayMenu() = 0;
 //	static virtual void menuHandler();
 	virtual boolean checkForCancel();

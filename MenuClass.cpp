@@ -94,3 +94,7 @@ void MenuClass::setCurrentMenu(MenuList* aMenu) {
 	currentItemIndex = 0;
 }
 
+boolean MenuClass::isCancelled() {
+	return cancelFlag;
+}
+
