@@ -143,7 +143,7 @@ Blocking functions could simply return true at the end.
 
 #include "REBL_UI.h"
 #include <LiquidCrystal_SPI_8Bit.h>
-#include <Time.h>
+#include <TimeLib.h>
 
 #define ENCODER_INTERRUPT_PIN 2
 #define ENCODER_B_PIN 4
