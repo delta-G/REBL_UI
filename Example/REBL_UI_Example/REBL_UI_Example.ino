@@ -12,6 +12,13 @@
 #define LCD_GREEN A2
 #define LCD_RED A4
 
+//forward declaration for the functions
+boolean fun1();
+boolean pressToExit();
+boolean pickNumber();
+boolean fourLetterWord();
+boolean enterTime();
+boolean showTime();
 
 
 MenuItem PROGMEM menuItems[] = {
